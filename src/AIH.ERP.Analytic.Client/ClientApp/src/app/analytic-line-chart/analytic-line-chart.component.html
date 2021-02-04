@@ -1,0 +1,29 @@
+<div class="row">
+  <div class="col-md-6">
+    <canvas baseChart
+            [datasets]="lineChartProfitData"
+            [labels]="lineChartLabels"
+            [options]="lineChartOptions"
+            [colors]="lineChartProfitColors"
+            [legend]="lineChartLegend"
+            [chartType]="lineChartType"
+            [plugins]="lineChartPlugins">
+    </canvas>
+  </div>
+  <div class="col-md-6">
+    <canvas baseChart
+                [datasets]="lineChartExpenseData"
+                [labels]="lineChartLabels"
+                [options]="lineChartOptions"
+                [colors]="lineChartExpenseColors"
+                [legend]="lineChartLegend"
+                [chartType]="lineChartType"
+                [plugins]="lineChartPlugins">
+    </canvas>
+  </div>
+</div>
+
+
+
+
+

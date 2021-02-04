@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AIH.ERP.Analytic.DataAccess\AIH.ERP.Analytic.DataAccess.csproj" />
+    <ProjectReference Include="..\AIH.ERP.Analytic.Domain\AIH.ERP.Analytic.Domain.csproj" />
+    <ProjectReference Include="..\AIH.ERP.Analytic.Shared\AIH.ERP.Analytic.Shared.csproj" />
+  </ItemGroup>
+
+</Project>

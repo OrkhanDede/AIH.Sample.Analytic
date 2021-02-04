@@ -1,0 +1,66 @@
+<div>
+  <h1>Analytic</h1>
+  <div class="container">
+    <br />
+    <div class="row">
+      <div class="col-md-3">
+        <label>Companies: </label>
+      </div>
+      <div class="col-md-3">
+        <label>From </label>
+      </div>
+      <div class="col-md-3">
+        <label>To </label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-3">
+        <select (change)="onChangeSelectListItem($event)">
+          <option value="0">--Please select any company--</option>
+          <option *ngFor="let company of companies" value={{company.id}}>
+            {{company.title}}
+          </option>
+        </select>
+      </div>
+      <div class="col-md-3">
+        <input class="form-control"
+               [(ngModel)]="yearFrom"
+               bsDatepicker
+               [container]="'html'"
+               [bsConfig]="{
+                dateInputFormat: 'YYYY',
+                minMode: 'year'
+              }" />
+      </div>
+      <div class="col-md-3">
+        <input class="form-control"
+               [(ngModel)]="yearTo"
+               bsDatepicker
+               [container]="'html'"
+               [bsConfig]="{
+                dateInputFormat: 'YYYY',
+                minMode: 'year'
+              }" />
+      </div>
+      <div class="col-md-3">
+        <button (click)="onClickGetBtn($event)" class="btn btn-success">Get</button>
+      </div>
+    </div>
+  </div>
+  <hr />
+  <br />
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <analytic-pie-chart *ngIf="loadedAnalytic" [dataAnalytic]="companyAnalytics"></analytic-pie-chart>
+      </div>
+      <div class="col-md-6">
+        <analytic-bar-chart *ngIf="loadedAnalytic" [dataAnalytic]="companyAnalytics"></analytic-bar-chart>
+      </div>
+    </div>
+    <hr />
+    <br />
+    <analytic-line-chart *ngIf="loadedAnalytic" [dataAnalytic]="companyAnalytics"></analytic-line-chart>
+  </div>
+</div>
+<ng-http-loader></ng-http-loader>

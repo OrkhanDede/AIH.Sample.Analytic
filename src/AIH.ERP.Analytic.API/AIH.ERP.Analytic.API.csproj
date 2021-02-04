@@ -1,0 +1,41 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <UserSecretsId>23fed123-179b-45ee-87b5-63de313a9612</UserSecretsId>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile></DocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Remove="FakeDatas\MOCK_DATA_EXPENSE_1000.json" />
+    <Content Remove="FakeDatas\MOCK_DATA_PROFIT_1000.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.1" NoWarn="NU1605" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="5.0.1" NoWarn="NU1605" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AIH.ERP.Analytic.Application\AIH.ERP.Analytic.Application.csproj" />
+    <ProjectReference Include="..\AIH.ERP.Analytic.DataAccess\AIH.ERP.Analytic.DataAccess.csproj" />
+    <ProjectReference Include="..\AIH.ERP.Analytic.Domain\AIH.ERP.Analytic.Domain.csproj" />
+    <ProjectReference Include="..\AIH.ERP.Analytic.Shared\AIH.ERP.Analytic.Shared.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="FakeDatas\MOCK_DATA_EXPENSE_1000.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="FakeDatas\MOCK_DATA_PROFIT_1000.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>
