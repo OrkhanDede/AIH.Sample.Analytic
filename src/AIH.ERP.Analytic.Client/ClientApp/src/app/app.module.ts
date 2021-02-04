@@ -4,6 +4,9 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { NgHttpLoaderModule } from 'ng-http-loader';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+
+
 
 
 import { AppComponent } from './app.component';
@@ -49,6 +52,7 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
     BrowserAnimationsModule,
     BsDatepickerModule.forRoot(),
     NgHttpLoaderModule.forRoot(),
+    NgMultiSelectDropDownModule.forRoot(),
 
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },

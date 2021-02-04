@@ -1,54 +1,56 @@
 <div>
-  <h1>Analytic</h1>
   <div class="container">
     <br />
-    <div class="row">
-      <div class="col-md-3">
-        <label>Companies: </label>
+
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label>Companies</label>
+        <div style="margin-bottom: 5px">
+          <ng-multiselect-dropdown [placeholder]="'please choose companies'"
+                                   [data]="dropdownList"
+                                   [(ngModel)]="selectedItems"
+                                   [settings]="dropdownSettings"
+                                   (onDeSelect)="onItemDeSelect($event)"
+                                   (onSelect)="onItemSelect($event)"
+                                   (onSelectAll)="onSelectAll($event)">
+          </ng-multiselect-dropdown>
+        </div>
       </div>
-      <div class="col-md-3">
-        <label>From </label>
+
+      <div class="form-group col-md-3">
+        <label>From</label>
+        <div class="" style="margin-bottom: 5px">
+          <input class="form-control"
+                 [(ngModel)]="yearFrom"
+                 bsDatepicker
+                 [minDate]="minDate"
+                 [maxDate]="maxDate"
+                 [container]="'html'"
+                 [bsConfig]="{
+                dateInputFormat: 'YYYY',
+                minMode: 'year'
+              }" />
+        </div>
       </div>
-      <div class="col-md-3">
-        <label>To </label>
+      <div class="form-group col-md-3">
+        <label>To</label>
+        <div style="margin-bottom: 5px">
+          <input class="form-control"
+                 [(ngModel)]="yearTo"
+                 bsDatepicker
+                 [minDate]="minDate"
+                 [maxDate]="maxDate"
+                 [container]="'html'"
+                 [bsConfig]="{
+                dateInputFormat: 'YYYY',
+                minMode: 'year'
+              }" />
+        </div>
       </div>
+
     </div>
-    <div class="row">
-      <div class="col-md-3">
-        <select (change)="onChangeSelectListItem($event)">
-          <option value="0">--All companies--</option>
-          <option *ngFor="let company of companies" value={{company.id}}>
-            {{company.title}}
-          </option>
-        </select>
-      </div>
-      <div class="col-md-3">
-        <input class="form-control"
-               [(ngModel)]="yearFrom"
-               bsDatepicker
-               [minDate]="minDate"
-               [maxDate]="maxDate"
-               [container]="'html'"
-               [bsConfig]="{
-                dateInputFormat: 'YYYY',
-                minMode: 'year'
-              }" />
-      </div>
-      <div class="col-md-3">
-        <input class="form-control"
-               [(ngModel)]="yearTo"
-               bsDatepicker
-               [minDate]="minDate"
-               [maxDate]="maxDate"
-               [container]="'html'"
-               [bsConfig]="{
-                dateInputFormat: 'YYYY',
-                minMode: 'year'
-              }" />
-      </div>
-      <div class="col-md-3">
-        <button (click)="onClickGetBtn($event)" class="btn btn-success">Get</button>
-      </div>
+    <div class="col-md-12">
+      <button (click)="onClickGetBtn($event)" class="row btn btn-success" style="width: 100px;">Get</button>
     </div>
   </div>
   <hr />
@@ -62,8 +64,6 @@
         <analytic-bar-chart *ngIf="loadedAnalytic" [dataAnalytic]="companyAnalytics"></analytic-bar-chart>
       </div>
     </div>
-    <hr />
-    <br />
     <analytic-line-chart *ngIf="loadedAnalytic" [dataAnalytic]="companyAnalytics"></analytic-line-chart>
   </div>
 </div>
