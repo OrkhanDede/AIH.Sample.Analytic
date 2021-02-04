@@ -5,9 +5,9 @@ import { AppModule } from './app/app.module';
 import { environment } from './environments/environment';
 
 export function getBaseUrl() {
-  return "https://aiherpanalyticapi20210204010407.azurewebsites.net/api/";
+  //return "https://aiherpanalyticapi20210204010407.azurewebsites.net/api/";
   if (environment.production) {
-    return "https://aiherpanalyticapiapi.azure-api.net/api/";
+    return "https://aiherpanalyticapi20210204010407.azurewebsites.net/api/";
   } else {
     return "https://localhost:44379/api/";
   }

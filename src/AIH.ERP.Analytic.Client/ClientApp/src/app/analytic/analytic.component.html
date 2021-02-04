@@ -16,7 +16,7 @@
     <div class="row">
       <div class="col-md-3">
         <select (change)="onChangeSelectListItem($event)">
-          <option value="0">--Please select any company--</option>
+          <option value="0">--All companies--</option>
           <option *ngFor="let company of companies" value={{company.id}}>
             {{company.title}}
           </option>
@@ -26,6 +26,8 @@
         <input class="form-control"
                [(ngModel)]="yearFrom"
                bsDatepicker
+               [minDate]="minDate"
+               [maxDate]="maxDate"
                [container]="'html'"
                [bsConfig]="{
                 dateInputFormat: 'YYYY',
@@ -36,6 +38,8 @@
         <input class="form-control"
                [(ngModel)]="yearTo"
                bsDatepicker
+               [minDate]="minDate"
+               [maxDate]="maxDate"
                [container]="'html'"
                [bsConfig]="{
                 dateInputFormat: 'YYYY',

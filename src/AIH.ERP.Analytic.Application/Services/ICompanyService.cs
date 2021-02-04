@@ -13,6 +13,7 @@ namespace AIH.ERP.Analytic.Application.Services
         Task<List<Company>> GetAllCompanyAsync();
         Task<List<Company>> GetCompanies(CompanyFilterModel filterRequest);
         Task<List<AnalyticData>> GetAnalyticDataAsync(int companyId,int yearFrom,int yearTo);
+        Task<List<AnalyticData>> GetAnalyticDataForAllCompanyAsync(int yearFrom, int yearTo);
         Task AddProfitToCompanyAsync(Profit profit);
         Task AddExpenseToCompanyAsync(Expense expense);
         Task<bool> HasCompanyByIdAsync(int companyId);

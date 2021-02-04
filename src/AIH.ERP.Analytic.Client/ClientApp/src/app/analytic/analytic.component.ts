@@ -15,16 +15,19 @@ export class AnalyticComponent {
   public selectedCompanyId: number = 0;
   public yearFrom: string;
   public yearTo: string;
+  minDate: Date;
+  maxDate: Date;
   constructor(private companyService: CompanyService) {
+    this.minDate = new Date();
+    this.maxDate = new Date();
+    this.minDate.setDate(-2000);
+    this.maxDate.setDate(-50);
      companyService.getData().subscribe(data => {
        this.companies = data;
      });
   }
   onChangeSelectListItem(e) {
     this.loadedAnalytic = false;
-    if (e.target.value == "0") {
-       return;
-    }
     this.selectedCompanyId = e.target.value;
   }
   onClickGetBtn(e) {
@@ -36,9 +39,7 @@ export class AnalyticComponent {
     let yearTo = dateTimeTo.getFullYear();
     if (yearFrom >= yearTo) return;
     
-    if (this.selectedCompanyId == 0) {
-      return;
-    }
+
     this.companyService.getAnalytic(this.selectedCompanyId,yearFrom, yearTo).subscribe(data => {
       this.companyAnalytics = data;
       this.loadedAnalytic = true;

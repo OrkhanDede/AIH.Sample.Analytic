@@ -54,6 +54,10 @@ namespace AIH.ERP.Analytic.Application.Services
             int yearFrom, int yearTo)
         {
 
+            if (companyId == 0)
+            {
+                return await GetAnalyticDataForAllCompanyAsync(yearFrom, yearTo);
+            }
             var queryProfit = await
                 _profitRepository.Table
                     .Where(p => p.DateOfProfit.Year >= yearFrom
@@ -70,6 +74,63 @@ namespace AIH.ERP.Analytic.Application.Services
                 _expenseRepository.Table
                     .Where(p => p.DateOfExpense.Year >= yearFrom
                                 && p.DateOfExpense.Year <= yearTo && p.CompanyId == companyId)
+
+                    .GroupBy(p => p.DateOfExpense.Year)
+                    .Select(p => new
+                    {
+                        year = p.Key,
+                        Sum = p.Sum(s => s.Money)
+                    }).ToListAsync();
+
+            List<AnalyticData> result = new List<AnalyticData>();
+
+            if (queryProfit.Count >= queryExpense.Count)
+            {
+                foreach (var profits in queryProfit)
+                {
+                    result.Add(new AnalyticData()
+                    {
+                        Year = profits.year,
+                        ProfitAmount = profits.Sum,
+                        ExpenseAmount = queryExpense.Where(x => x.year == profits.year).Select(x => x.Sum).FirstOrDefault()
+                    });
+                }
+            }
+            else
+            {
+                foreach (var expsense in queryExpense)
+                {
+                    result.Add(new AnalyticData()
+                    {
+                        Year = expsense.year,
+                        ExpenseAmount = expsense.Sum,
+                        ProfitAmount = queryProfit.Where(x => x.year == expsense.year).Select(x => x.Sum).FirstOrDefault()
+                    });
+                }
+            }
+            return result;
+        }
+
+        public async Task<List<AnalyticData>> GetAnalyticDataForAllCompanyAsync(
+           int yearFrom, int yearTo)
+        {
+
+            var queryProfit = await
+                _profitRepository.Table
+                    .Where(p => p.DateOfProfit.Year >= yearFrom
+                                && p.DateOfProfit.Year <= yearTo)
+
+                    .GroupBy(p => p.DateOfProfit.Year)
+                    .Select(p => new
+                    {
+                        year = p.Key,
+                        Sum = p.Sum(s => s.Money)
+                    }).ToListAsync();
+
+            var queryExpense = await
+                _expenseRepository.Table
+                    .Where(p => p.DateOfExpense.Year >= yearFrom
+                                && p.DateOfExpense.Year <= yearTo)
 
                     .GroupBy(p => p.DateOfExpense.Year)
                     .Select(p => new
