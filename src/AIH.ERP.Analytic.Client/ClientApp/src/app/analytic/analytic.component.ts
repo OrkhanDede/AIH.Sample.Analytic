@@ -41,6 +41,7 @@ export class AnalyticComponent implements OnInit {
       this.companies = data;
       this.dropdownList = data.map(comp => ({ item_id: comp.id, item_text: comp.title }));
       this.selectedItems = this.dropdownList;
+      this.getAnalytic();//auto fill
     });
 
    
@@ -56,6 +57,9 @@ export class AnalyticComponent implements OnInit {
 
   }
   onClickGetBtn(e) {
+    this.getAnalytic();
+  }
+  getAnalytic() {
     this.loadedAnalytic = false;
     let dateTimeFrom = new Date(this.yearFrom);
     let dateTimeTo = new Date(this.yearTo);
@@ -71,17 +75,51 @@ export class AnalyticComponent implements OnInit {
     this.companyService.getAnalytic(ids, yearFrom, yearTo).subscribe(data => {
       this.companyAnalytics = data;
       this.loadedAnalytic = true;
-     
+
     });
   }
+  onFromYearDateValueChange(value: Date) {
+    this.loadedAnalytic = false;
+    if (value == null) return;
+    let yearFrom = value.getFullYear();
+    let yearTo = this.yearTo.getFullYear();
+    if (yearFrom >= yearTo) return;
+    if (this.selectedItems.length <= 0) return;
+
+    let ids = this.selectedItems.map(comp => {
+      return comp.item_id;
+    });
+    this.companyService.getAnalytic(ids, yearFrom, yearTo).subscribe(data => {
+      this.companyAnalytics = data;
+      this.loadedAnalytic = true;
+
+    });
+  }
+  onToYearDateValueChange(value: Date) {
+    this.loadedAnalytic = false;
+    if (value == null) return;
+    let yearTo = value.getFullYear();
+    let yearFrom = this.yearFrom.getFullYear();
+    if (yearFrom >= yearTo) return;
+    if (this.selectedItems.length <= 0) return;
+
+    let ids = this.selectedItems.map(comp => {
+      return comp.item_id;
+    });
+    this.companyService.getAnalytic(ids, yearFrom, yearTo).subscribe(data => {
+      this.companyAnalytics = data;
+      this.loadedAnalytic = true;
+
+    });
+  }  
   onItemDeSelect(item: any) {
-    console.log("deselect:" + item.item_id);
+    this.getAnalytic();
   }
   onItemSelect(item: any) {
-    console.log("select:" + item.item_id);
+    this.getAnalytic();
   }
   onSelectAll(items: any[]) {
-    console.log("select all:" + items);
+    this.getAnalytic();
   }
 }
 

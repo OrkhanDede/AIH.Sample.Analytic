@@ -25,6 +25,7 @@
                  bsDatepicker
                  [minDate]="minDate"
                  [maxDate]="maxDate"
+                 (bsValueChange)="onFromYearDateValueChange($event)"
                  [container]="'html'"
                  [bsConfig]="{
                 dateInputFormat: 'YYYY',
@@ -40,6 +41,7 @@
                  bsDatepicker
                  [minDate]="minDate"
                  [maxDate]="maxDate"
+                 (bsValueChange)="onToYearDateValueChange($event)"
                  [container]="'html'"
                  [bsConfig]="{
                 dateInputFormat: 'YYYY',
@@ -50,7 +52,7 @@
 
     </div>
     <div class="col-md-12">
-      <button (click)="onClickGetBtn($event)" class="row btn btn-success" style="width: 100px;">Get</button>
+   
     </div>
   </div>
   <hr />

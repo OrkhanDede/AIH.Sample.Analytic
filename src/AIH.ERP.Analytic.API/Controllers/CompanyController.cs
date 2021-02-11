@@ -96,7 +96,7 @@ namespace AIH.ERP.Analytic.API.Controllers
             //if(!ModelState.IsValid) return new BadRequestObjectResult(ModelState);
 
             var dataFiltered = await _companyService
-                .GetAnalyticDataAsync(model.Id, model.YearFrom, model.YearTo);
+                .GetAnalyticDataAsyncByIds(model.Ids, model.YearFrom, model.YearTo);
             return dataFiltered;
         }
     }

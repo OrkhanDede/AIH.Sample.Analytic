@@ -12,7 +12,7 @@ namespace AIH.ERP.Analytic.API.Models
         /// CompanyId
         /// </summary>
         [Required]
-        public int Id { get; set; }
+        public List<long> Ids { get; set; }
         
         [Required]
         public int YearFrom { get; set; }
